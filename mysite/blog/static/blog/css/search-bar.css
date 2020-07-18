@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+
+.search-navbar {
+    width: 200px;
+    height: 40px;
+    position: relative;
+    margin-top: -3px
+}
+
+.search-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.search-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 40px;
+}
+
+.search-container .search {
+  position: absolute;
+  right: calc(100% - 40px);
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  transition: all 1s;
+  z-index: 4;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+}
+
+.search-container .search:hover {
+  cursor: pointer;
+}
+
+.search-container .search::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 20px;
+  right: 8px;
+  bottom: 8px;
+  left: 22px;
+  width: 8px;
+  height: 2px;
+  background: black;
+  transform: rotate(45deg);
+  transition: all .5s;
+}
+
+.search-container .search::after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: -5px;
+  right: 0;
+  bottom: 0;
+  left: -2px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid black;
+  transition: all .5s;
+}
+
+.search-container input {
+  font-family: 'Inconsolata', monospace;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  width: 35px;
+  height: 35px;
+  outline: none;
+  border: none;
+  background: white;
+  color: #212529;
+  text-shadow: 0 0 10px white;
+  padding: 0 50px 0 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 15px -3px black, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  transition: all 1s;
+  opacity: 0;
+  z-index: 5;
+  font-weight: bolder;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+}
+
+.search-container input:hover {
+  cursor: pointer;
+}
+
+.search-container input:focus {
+  width: 200px;
+  opacity: 1;
+  cursor: text;
+}
+
+.search-container input:focus ~ .search {
+  right: 0%;
+  background: #151515;
+  z-index: 6;
+}
+
+.search-container input:focus ~ .search::before {
+  top: 8px;
+  left: 8px;
+  width: 15px;
+  background: white;
+}
+
+.search-container input:focus ~ .search::after {
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 2px;
+  border: none;
+  background: white;
+  border-radius: 0%;
+  transform: rotate(-45deg);
+}
+
+.search-container input::placeholder {
+  color: black;
+  opacity: 0.5;
+  font-weight: bolder;
+}
+
+#mainNav .search-container input:hover ~ .search {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+#mainNav .search-container input:focus ~ .search, input:hover ~ .search {
+  background: #151515;
+}
+
+#mainNav.is-fixed .search-container input:hover ~ .search {
+  background: #0085A1;
+}
+
+#mainNav.is-fixed .search-container input:focus ~ .search, input:hover ~ .search {
+  background: #151515;
+}

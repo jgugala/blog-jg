@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block resources %}
+<script src="{% static 'admin/js/urlify.js' %}"></script>
+<script src="{% static 'admin/js/vendor/xregexp/xregexp.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/post-create.css' %}">
+{% endblock resources %}
+
+
+{% block header %}
+<header class="masthead" style="background-image: url({% static 'blog/img/home-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Add the new one</h1>
+                    <span class="subheading">A Blog by Jakub Gugała</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% comment %}
+                    {{ photos_formset.management_form }}
+                {% endcomment %}
+                <div id="form_set">
+                    {% bootstrap_formset photos_formset %}
+                </div>
+                <input type="button" class="btn btn-link" value="Add More" id="add_more">
+                <div id="empty_form" style="display:none">
+                    {% bootstrap_form photos_formset.empty_form %}
+                </div>
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">Save</button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+document.getElementById("id_title").onkeyup = function() {
+    var e = document.getElementById("id_slug");
+    if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
+}
+
+$('#add_more').click(function() {
+        console.log('asd');
+        var form_idx = $('#id_photos-TOTAL_FORMS').val();
+        //debugger;
+        $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+        $('#id_photos-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+</script>
+
+{% endblock content %}

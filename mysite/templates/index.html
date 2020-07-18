@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<header class="masthead" style="background-image: url({% static 'blog/img/home-bg.jpg' %})"
+        xmlns="http://www.w3.org/1999/html">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>The One without title... and need</h1>
+                    <span class="subheading">A Blog by Jakub Gugała</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% for post in posts %}
+            <form action="{% url 'post_delete' post.slug %}" method="post">
+                {% csrf_token %}
+                <div class="post-preview">
+                    <a href="{% url 'post_details' post.slug  %}">
+                        <h2 class="post-title">
+                            {{ post.title }}
+                        </h2>
+                        <!-- <h3 class="post-subtitle">
+                             Problems look mighty small from 150 miles up
+                         </h3>
+                         <p class="card-text">{{post.content|slice:":200" }}</p>-->
+                    </a>
+                    <p class="post-meta">Posted by
+                        <a href="#">{{ post.author }}</a>
+                        on {{ post.created_on}}
+                        {% if user.is_superuser %}
+                        <br>
+                        <a href="{% url 'post_update' post.slug %}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        {% comment %}
+                        <a href="{% url 'post_delete' post.slug %}">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                        {% endcomment %}
+                        <button class="fa-button confirm-delete">
+                            <i class="fa fa-trash-alt"></i>
+                        </button>
+                        {% endif %}
+                    </p>
+                </div>
+            </form>
+            <hr>
+            {% endfor %}
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('click', '.confirm-delete', function(){
+        return confirm('Are you sure you want to delete this?');
+    })
+
+    function deleteFunction(e) {
+            if(!confirm("Are you sure you want to delete?")){
+                e.preventDefault();
+            }else{
+             $('#person-delete').submit();
+            }
+        }
+</script>
+{% endblock content %}
