@@ -17,7 +17,6 @@ from .models import Post
 class PostsList(generic.ListView):
     template_name = 'index.html'
     context_object_name = 'posts'
-    login_url = '/sign-in'
 
     def get_queryset(self):
         query = self.request.GET.get('q')

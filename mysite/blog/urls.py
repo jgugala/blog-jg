@@ -10,8 +10,8 @@ urlpatterns = [
     path('', views.PostsList.as_view(), name='home'),
     path('search/', views.PostsList.as_view(), name='search_results'),
     path('create/', views.PostCreate.as_view(), name='post_create'),
-    path('<slug:slug>/update/', views.PostUpdate.as_view(), name='post_update'),
-    path('<slug:slug>/delete/', views.PostDelete.as_view(), name='post_delete'),
+    path('update/<slug:slug>/', views.PostUpdate.as_view(), name='post_update'),
+    path('delete/<slug:slug>/', views.PostDelete.as_view(), name='post_delete'),
     path('<slug:slug>/', views.PostDetails.as_view(), name='post_details'),
 ]
 
