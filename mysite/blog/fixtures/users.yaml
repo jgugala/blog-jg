@@ -1,0 +1,32 @@
+-   model: auth.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$180000$cxkS6ZuIETY0$XQ/9hEHxYFcyuB2BcGJjTgdGP//CSNRXZu4fHF0Doz8=
+        last_login: 2020-08-14 07:27:47.018719+00:00
+        is_superuser: true
+        username: jgugala
+        first_name: ''
+        last_name: ''
+        email: hopek.soad@gmail.com
+        is_staff: true
+        is_active: true
+        date_joined: 2020-05-18 16:50:46.982972+00:00
+        groups: []
+        user_permissions:
+        - 1
+        - 12
+-   model: auth.user
+    pk: 2
+    fields:
+        password: pbkdf2_sha256$180000$AaaYDDhR1MPe$e93CaJLTqZ5MsdPqngdOcABROnqV8lOdptSF2lb+mpI=
+        last_login: 2020-07-29 14:42:37.245410+00:00
+        is_superuser: false
+        username: jlennon
+        first_name: John
+        last_name: Lennon
+        email: lennon@thebeatles.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-05-30 13:10:11.488631+00:00
+        groups: []
+        user_permissions: []

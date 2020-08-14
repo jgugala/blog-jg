@@ -1,0 +1,94 @@
+-   model: blog.post
+    pk: 1
+    fields:
+        title: My first post
+        slug: my-first-post
+        author: 1
+        updated_on: 2020-05-20 17:03:39.031559+00:00
+        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur\
+            \ turpis erat, viverra eget lobortis a, dictum eu magna. Curabitur nulla\
+            \ ante, ultricies id interdum et, gravida ac nibh. Sed sed turpis dui.\
+            \ In eros leo, rhoncus ac magna nec, blandit laoreet est. Sed leo massa,\
+            \ blandit sed odio id, aliquam rhoncus sem. Nullam convallis tortor maximus\
+            \ ex tincidunt pulvinar. In euismod dolor nibh, sollicitudin sagittis\
+            \ lorem ornare sit amet.\r\n\r\nMorbi tempus nisi ac luctus maximus. Suspendisse\
+            \ potenti. Fusce ut venenatis magna. Duis lobortis ipsum eu leo hendrerit,\
+            \ et congue dolor finibus. Fusce sit amet lectus dictum, bibendum arcu\
+            \ id, laoreet libero. Nullam imperdiet mattis leo, sed sodales velit convallis\
+            \ sed. Fusce nec ex vitae elit varius hendrerit. Sed vestibulum fermentum\
+            \ nunc, vitae iaculis nisi imperdiet nec. Proin mauris orci, tristique\
+            \ sed lorem eget, iaculis finibus nunc. Donec pulvinar vel velit sed molestie.\r\
+            \n\r\nInteger facilisis risus molestie tincidunt vulputate. Vivamus placerat\
+            \ lacinia consequat. Proin cursus porta pulvinar. Nulla facilisi. Fusce\
+            \ maximus, neque a fringilla finibus, nulla lectus tempor nulla, vitae\
+            \ porta leo ligula in erat. Interdum et malesuada fames ac ante ipsum\
+            \ primis in faucibus. In hac habitasse platea dictumst. Lorem ipsum dolor\
+            \ sit amet, consectetur adipiscing elit.\r\n\r\nQuisque id leo a nunc\
+            \ porttitor dictum eu sed dolor. In hac habitasse platea dictumst. Sed\
+            \ nec odio dapibus, malesuada est sit amet, eleifend nunc. In vestibulum\
+            \ nisi turpis, nec accumsan enim tempor et. Nam ac tristique nibh. Sed\
+            \ commodo nisl lacus, sit amet mattis purus tristique et. Ut gravida suscipit\
+            \ erat sed malesuada. Ut eget interdum arcu. Donec et gravida velit. Ut\
+            \ facilisis enim nec placerat bibendum. Praesent eu ipsum nec nisi pellentesque\
+            \ consequat id vitae velit. Praesent vel eros eu justo tempor mollis.\r\
+            \n\r\nPellentesque habitant morbi tristique senectus et netus et malesuada\
+            \ fames ac turpis egestas. Maecenas at massa id lorem egestas ultricies.\
+            \ Quisque sit amet arcu dictum, consectetur nisl sit amet, tempus turpis.\
+            \ Aliquam a nunc porta, porta risus scelerisque, convallis enim. Nam sollicitudin\
+            \ dictum nunc, quis semper justo eleifend nec. Nulla faucibus diam placerat\
+            \ magna vulputate commodo. Aliquam at odio sed eros malesuada fermentum\
+            \ nec eu erat. Proin id hendrerit odio. Phasellus venenatis ultricies\
+            \ auctor. Nunc commodo massa eget felis tincidunt, eget tempor dolor efficitur.\
+            \ Fusce a diam condimentum, lobortis nisi blandit, malesuada dolor. Aliquam\
+            \ sem diam, ullamcorper semper velit sed, iaculis ullamcorper lorem. Sed\
+            \ rutrum, dui a lacinia fermentum, lacus magna consectetur dolor, a suscipit\
+            \ libero ligula vel metus. Aenean enim mi, malesuada ac nisl a, ornare\
+            \ pellentesque purus. Proin ac enim posuere, efficitur sapien in, auctor\
+            \ sem."
+        created_on: 2020-05-18 16:57:19.373793+00:00
+        status: 1
+-   model: blog.post
+    pk: 2
+    fields:
+        title: My second post
+        slug: my-second-post
+        author: 1
+        updated_on: 2020-05-20 17:03:50.000419+00:00
+        content: Second one :)
+        created_on: 2020-05-18 17:08:36.183490+00:00
+        status: 1
+-   model: blog.post
+    pk: 3
+    fields:
+        title: Last one...for now
+        slug: last-one
+        author: 1
+        updated_on: 2020-05-18 17:09:22.482852+00:00
+        content: Bla, bla, bla, bla
+        created_on: 2020-05-18 17:09:22.482946+00:00
+        status: 0
+-   model: blog.post
+    pk: 105
+    fields:
+        title: Post with photos
+        slug: post-photos
+        author: 1
+        updated_on: 2020-07-23 16:18:25.008985+00:00
+        content: '![](/media/images/IMG_20190426_193722.jpg)'
+        created_on: 2020-07-23 16:18:08.898606+00:00
+        status: 0
+-   model: blog.post
+    pk: 108
+    fields:
+        title: Visa
+        slug: visa
+        author: 1
+        updated_on: 2020-08-08 11:56:23.081557+00:00
+        content: '![](/media/images/ic_visa.png)'
+        created_on: 2020-08-08 11:54:54.457944+00:00
+        status: 0
+-   model: blog.postphoto
+    pk: 20
+    fields:
+        post: 108
+        photo: images/ic_visa.png

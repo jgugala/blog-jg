@@ -30,8 +30,8 @@ class Post(models.Model):
         return self.title
 
     # or define `get_success_url` method in the correspondent class based view
-    # def get_absolute_url(self):
-    #     return reverse('post_details', args=[self.object.slug])
+    def get_absolute_url(self):
+        return reverse('post_details', args=[self.slug])
 
 
 class PostPhoto(models.Model):

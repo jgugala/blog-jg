@@ -75,8 +75,8 @@ class PostCreate(UserPassesTestMixin, generic.CreateView):
             data['photos_formset'] = PostPhotoFormSet()
         return data
 
-    def get_success_url(self):
-        return reverse('post_details', args=[self.object.slug])
+    # def get_success_url(self):
+    #     return reverse('post_details', args=[self.object.slug])
 
     # setting an initial data to the form
     # def get_initial(self, *args, **kwargs):
@@ -110,10 +110,14 @@ class PostUpdate(PostCreate, generic.UpdateView):
     pass
 
 
-class PostDelete(generic.DeleteView):
+class PostDelete(UserPassesTestMixin, generic.DeleteView):
     model = Post
     success_url = reverse_lazy('home')
+    login_url = '/sign-in'
     template_name = 'post_confirm_delete.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 # function-based view
