@@ -1,10 +1,16 @@
 import doctest
 from . import test_doctests
-from .tests import *
 from .test_models import *
-from .test_fixtures import *
+from .test_views import *
+from .test_forms import *
+
+
+DOCTEST_MODULES = (
+    test_doctests,
+)
 
 
 def load_tests(loader, tests, ignore):
-    tests.addTests(doctest.DocTestSuite(test_doctests))
+    for m in DOCTEST_MODULES:
+        tests.addTests(doctest.DocTestSuite(m))
     return tests

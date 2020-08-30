@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'markdownify',
     'blog',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,15 @@ MARKDOWNIFY_WHITELIST_ATTRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Use nose to run all tests
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the blog app
+NOSE_ARGS = [
+    '--cover-package=blog',
+    '--with-doctest',
+    '--doctest-tests',
+    # '--debug=nose.plugins.doctests',
+    '--with-coverage',
+]

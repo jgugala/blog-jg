@@ -1,0 +1,14 @@
+[run]
+omit =
+    ../*migrations*
+    ../*tests*
+    ../*__init__.py
+    ./manage.py
+    ./mysite/*
+
+[report]
+show_missing = True
+exclude_lines =
+    # Ignore imports
+    # from
+    # import

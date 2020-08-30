@@ -11,8 +11,8 @@ Next try to create a sample post, save it and go to its details page.
 At the end go back to the home and check the context value for posts list.
 >>> from django.test import Client
 >>> from django.contrib.auth.models import User
->>> from ..models import Post
 >>> import datetime
+>>> from blog.models import Post
 
 >>> from django.urls import reverse
 >>> client = Client()
@@ -36,10 +36,14 @@ created_on=datetime.datetime(2008,5,5,16,20))
 >>> response = client.get(post.get_absolute_url())
 >>> response.status_code
 200
+>>> response.context['post']
+<Post: My post>
 
 
 >>> response = client.get(reverse('home'))
->>> response.context['posts']
-<QuerySet [<Post: My post>]>
-"""
+>>> response.context['posts'][0]
+<Post: My post>
 
+>>> User.objects.get(pk=user.pk).delete()
+(2, {'admin.LogEntry': 0, 'auth.User_groups': 0, 'auth.User_user_permissions': 0, 'blog.PostPhoto': 0, 'blog.Post': 1, 'auth.User': 1})
+"""
