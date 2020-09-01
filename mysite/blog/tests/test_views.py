@@ -57,7 +57,7 @@ class PostsListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEquals(len(response.context['posts']), expected_posts_list_size)
 
-    def test_list_all_posts_for_admin(self):
+    def test_list_all_posts_for_superuser(self):
         # GIVEN
         expected_posts_list_size = 8
         password = '12345-super'
@@ -99,9 +99,78 @@ class PostDetailsViewTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'post_details.html')
 
-    def test_exception_for_non_admin_user_and_draft_post(self):
+    def test_exception_for_non_superuser_and_draft_post(self):
         # WHEN
         response = self.client.get('/my-test-post1/')
         # THEN
         self.assertEquals(response.status_code, 403)
 
+
+class PostCreateViewTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create_superuser(username='test-user-super', password='12345-super')
+
+    def test_view_url_accessible_for_superuser(self):
+        # GIVEN
+        self.client.login(username='test-user-super', password='12345-super')
+        # WHEN
+        response = self.client.get(reverse('post_create'))
+        # THEN
+        self.assertEquals(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        # GIVEN
+        self.client.login(username='test-user-super', password='12345-super')
+        # WHEN
+        response = self.client.get(reverse('post_create'))
+        # THEN
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_add.html')
+
+    def test_view_url_not_accessible_for_standard_user(self):
+        # GIVEN
+        User.objects.create_user(username='test-user', password='12345')
+        self.client.login(username='test-user', password='12345')
+        # WHEN
+        response = self.client.get(reverse('post_create'))
+        # THEN
+        self.assertEquals(response.status_code, 403)
+
+    def test_view_url_redirect_for_not_logged_in_user(self):
+        # WHEN
+        response = self.client.get(reverse('post_create'))
+        # THEN
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/sign-in?next=/create/', target_status_code=301)
+
+
+class SignInViewTest(TestCase):
+
+    def test_view_accessible_for_not_logged_in_user(self):
+        # WHEN
+        response = self.client.get(reverse('sign_in'))
+        # THEN
+        self.assertEquals(response.status_code, 200)
+
+    def test_view_redirect_to_home_for_already_logged_in_user(self):
+        # GIVEN
+        User.objects.create_user(username='test-user', password='12345')
+        self.client.login(username='test-user', password='12345')
+        # WHEN
+        response = self.client.get(reverse('sign_in'))
+        # THEN
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_user_sign_in_and_redirect_to_home(self):
+        # GIVEN
+        User.objects.create_user(username='test-user', password='12345')
+        # WHEN
+        response = self.client.post(reverse('sign_in'), {'username': 'test-user', 'password': '12345'}, follow=True)
+        # THEN
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue(response.context['user'].is_active)
+        self.assertEquals(response.redirect_chain[-1][-1], 302)
+        self.assertRedirects(response, '/')
