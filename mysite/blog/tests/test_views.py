@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from ..models import Post
 
@@ -174,3 +174,12 @@ class SignInViewTest(TestCase):
         self.assertTrue(response.context['user'].is_active)
         self.assertEquals(response.redirect_chain[-1][-1], 302)
         self.assertRedirects(response, '/')
+
+    def test_user_sign_in_with_incorrect_credentials(self):
+        # GIVEN
+        User.objects.create_user(username='test-user', password='12345')
+        # WHEN
+        response = self.client.post(reverse('sign_in'), {'username': 'test-user', 'password': '1234'})
+        # THEN
+        self.assertEquals(response.status_code, 200)
+        self.assertFormError(response, 'form', None, _('Your username and password didn\'t match. Please try again.'))
