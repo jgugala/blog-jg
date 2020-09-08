@@ -3,6 +3,7 @@ from . import test_doctests
 from .test_models import *
 from .test_views import *
 from .test_forms import *
+from .test_selenium import *
 
 
 DOCTEST_MODULES = (
