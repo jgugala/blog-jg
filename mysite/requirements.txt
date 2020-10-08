@@ -9,6 +9,7 @@ django-bootstrap3==12.1.0
 django-markdownify==0.8.0
 django-nose==1.4.6
 docopt==0.6.2
+gunicorn==20.0.4
 idna==2.10
 Jinja2==3.0.0a1
 Markdown==3.2.2

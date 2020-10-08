@@ -20,12 +20,14 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9s(-+le9yo%uyt643g20n9cdz_ps9058sw^$yt52y9@6%&jx3t'
+# SECRET_KEY = '9s(-+le9yo%uyt643g20n9cdz_ps9058sw^$yt52y9@6%&jx3t'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '9s(-+le9yo%uyt643g20n9cdz_ps9058sw^$yt52y9@6%&jx3t')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['blog.jg.ct8.pl', '127.0.0.1']
 
 
 # Application definition
@@ -121,8 +123,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+# The URL to use when referring to static files (where they will be served from)
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 
 
 MARKDOWNIFY_WHITELIST_TAGS = [
@@ -133,9 +141,6 @@ MARKDOWNIFY_WHITELIST_ATTRS = [
     'alt',
     'onmouseover',
 ]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 # Use nose to run all tests
 # TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

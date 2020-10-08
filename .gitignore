@@ -119,3 +119,9 @@ GitHub.sublime-settings
 
 # Scritp for running Django server
 runserver.sh
+
+# Collected static files
+mysite/public/static
+
+# Phusion Passenger module config
+passenger_wsgi.py
